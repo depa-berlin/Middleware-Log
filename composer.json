@@ -1,0 +1,24 @@
+{
+    "name": "depa/middleware-logger",
+    "description": ".....",
+    "keywords": ["framework","depa","Logger"],
+    "license": "MIT",
+    "homepage": "https://github.com/depa-berlin/Middleware-Logger",
+    "authors": [
+        {
+            "name": "Mirko Fenrich",
+            "email": "fenrich@designpark.de"
+        }
+    ],
+    "require": {
+        "zendframework/zend-log": "^2.9",
+        "ccampbell/chromephp": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Depa\\MiddlewareLogger\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

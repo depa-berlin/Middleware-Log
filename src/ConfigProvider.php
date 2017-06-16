@@ -1,9 +1,11 @@
 <?php
 
-namespace Depa\Logger;
+namespace Depa\MiddlewareLogger;
 
 
-use Zend\Log\PsrLoggerAdapter;
+
+
+
 
 /**
  * The configuration provider for the Core module
@@ -39,8 +41,10 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories'  => [
-                LoggerMiddleware::class => LoggerMiddlewareFactory::class,
+                \Depa\MiddlewareLogger\Logger::class => \Depa\MiddlewareLogger\LoggerFactory::class,
+                \Depa\MiddlewareLogger\LoggerMiddleware::class => \Depa\MiddlewareLogger\LoggerMiddlewareFactory::class,
                 
+                 
             ],
         ];
     }

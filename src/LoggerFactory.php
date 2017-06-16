@@ -4,7 +4,7 @@ namespace Depa\Logger;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Zend\Log\Logger;
-use Zend\Log\PsrLoggerAdapter;
+
 
 
 class LoggerFactory implements FactoryInterface{
@@ -22,15 +22,8 @@ class LoggerFactory implements FactoryInterface{
 //              return $sessionManager;
          }
          
-         $loggerConfigArray = $config['logger'];
-         
-         $zendLogLogger = new Logger();
-         $wr = new \Zend\Log\Writer\FirePHP();
-         
-         new \Zend\Log\Writer\Noop();
-         $zendLogLogger->addWriter($wr);
-         
-         $PsrLogger = new PsrLoggerAdapter($logger);
+         //$PsrLogger = new \Depa\Logger\Logger\NullLogger();
+         $PsrLogger = new \Depa\Logger\Logger\ChromePhpLogger();
          
          return ($PsrLogger);
         

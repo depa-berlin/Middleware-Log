@@ -5,47 +5,28 @@ use Psr\Log\LoggerInterface;
 
 class Logger
 {
-
+    /**
+     * 
+     * @var unknown Psr\Log\LoggerInterface
+     */
     public static $staticLogger;
-    public $logger;
+    /**
+     * 
+     * @var unknown Startzeit des Loggers
+     */
+    private static $startTime;
 
     public function __construct(LoggerInterface $logger)
     {
         self::$staticLogger = $logger;
-        $this->logger = $logger;
+        self::$startTime = microtime(true);
     }
 
-    public function __call($name, $arguments)
+    public function __call($name, $argumentsArray)
     {
-        $argumentsArray = implode(', ', $arguments);
-        if($name == 'log'){
-            $argumentsArray[1] = self::prepearObject($argumentsArray[1]);
-        }
-        else{
-            $argumentsArray[0] = self::prepearObject($argumentsArray[0]);
-        }
-        switch (count($argumentsArray)) {
-            case 1:
-                $this->logger->$name($argumentsArray[0]);
-                break;
-            case 1:
-                $this->logger->$name($argumentsArray[0], $argumentsArray[1]);
-                break;
-            case 1:
-                $this->logger->$name($argumentsArray[0], $argumentsArray[1], $argumentsArray[2]);
-                break;
-        }
-    }
-
-
-    public static function __callStatic($name, $arguments)
-    {
-        $argumentsArray = implode(', ', $arguments);
-        if($name == 'log'){
-            $argumentsArray[1] = self::prepearObject($argumentsArray[1]);
-        }
-        else{
-            $argumentsArray[0] = self::prepearObject($argumentsArray[0]);
+        if($name == 'time'){
+            $name = "debug";
+            $argumentsArray[0] = 'execution time: '.self::getExecutionTime();
         }
         switch (count($argumentsArray)) {
             case 1:
@@ -59,22 +40,31 @@ class Logger
                 break;
         }
     }
-    
-    private static function prepearObject($obj){
-        if(!is_object($obj))
-        {
-            return $obj;
+    public static function __callStatic($name, $argumentsArray)
+    {
+        if($name == 'time'){
+            $name = "debug";
+            $argumentsArray[0] = 'execution time: '.self::getExecutionTime();
         }
-        $ret = [];
-        $ret[get_class($obj)] = [];
-        foreach (get_object_vars($obj) as $name => $content) {
-            if (!is_object($content)) {
-                $ret[$name] = ['type' => gettype($content), 'content' => $content];
-            } else {
-                $ret[$name] = ['type' => gettype($content), 'class' => get_class($content)];
-            }
+        switch (count($argumentsArray)) {
+            case 1:
+                self::$staticLogger->$name($argumentsArray[0]);
+                break;
+            case 1:
+                self::$staticLogger->$name($argumentsArray[0], $argumentsArray[1]);
+                break;
+            case 1:
+                self::$staticLogger->$name($argumentsArray[0], $argumentsArray[1], $argumentsArray[2]);
+                break;
         }
-        return $ret;
     }
-    
+    /**
+     * Gibt bei Aufruf die aktuelle Ausführungszeit zurück
+     * 
+     * @return number
+     */
+    private static function getExecutionTime()
+    {
+        return (microtime(true) - self::$startTime);
+    }       
 }

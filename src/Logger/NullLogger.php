@@ -13,7 +13,6 @@ class NullLogger
         $logger = new Logger();
         $logger->addWriter(new \Zend\Log\Writer\Noop());
         $this->logger = new PsrLoggerAdapter($logger);
-
     }
     public function getLogger()
     {

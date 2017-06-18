@@ -15,7 +15,6 @@ class ChromePhpLogger
         $this->logger = new PsrLoggerAdapter($logger);
 
     }
-    
     public function getLogger()
     {
         return $this->logger;

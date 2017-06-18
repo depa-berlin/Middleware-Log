@@ -14,7 +14,6 @@ class FirePhpLogger
         $logger->addWriter(new \Zend\Log\Writer\FirePHP());
         $this->logger = new PsrLoggerAdapter($logger);
     }
-    
     public function getLogger()
     {
         return $this->logger;

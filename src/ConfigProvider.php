@@ -2,11 +2,6 @@
 
 namespace Depa\MiddlewareLogger;
 
-
-
-
-
-
 /**
  * The configuration provider for the Core module
  *

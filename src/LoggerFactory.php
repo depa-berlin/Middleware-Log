@@ -4,9 +4,6 @@ namespace Depa\MiddlewareLogger;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
-
-
-
 class LoggerFactory implements FactoryInterface{
     /**
      * {@inheritDoc}
@@ -15,23 +12,18 @@ class LoggerFactory implements FactoryInterface{
     public function __invoke(ContainerInterface $container,$requestedName, array $options = null)
     {
          $config = $container->get('config');
+         $loggerConfig = array_key_exists('logger', $config) ? $config['logger'] : [];
          
-         if (!isset($config['logger'])) {
-//              $sessionManager = new SessionManager();
-//              Container::setDefaultManager($sessionManager);
-//              return $sessionManager;
-         }
+         $logWriter = array_key_exists('writer', $loggerConfig) ? $loggerConfig['writer'] : 'Null';
          
-         
-         //$PsrLogger = (new \Depa\MiddlewareLogger\Logger\NullLogger())->getLogger();
-         $PsrLogger = (new \Depa\MiddlewareLogger\Logger\ChromePhpLogger())->getLogger();
+         $logWriter = '\\Depa\\MiddlewareLogger\\Logger\\'.$logWriter.'Logger';
+        
+         $PsrLogger = (new $logWriter())->getLogger();
+
 
          $log = new Logger($PsrLogger);
          
          return ($log);
         
     }
-
-    
-    
 }

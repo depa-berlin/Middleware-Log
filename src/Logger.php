@@ -26,7 +26,8 @@ class Logger
     {
         if($name == 'time'){
             $name = "debug";
-            $argumentsArray[0] = 'execution time: '.self::getExecutionTime();
+            $info = array_key_exists(0, $argumentsArray) ? ' :' . $argumentsArray[0] : '';
+            $argumentsArray[0] = 'execution time: ' . self::getExecutionTime() . $info;
         }
         switch (count($argumentsArray)) {
             case 1:
@@ -44,7 +45,8 @@ class Logger
     {
         if($name == 'time'){
             $name = "debug";
-            $argumentsArray[0] = 'execution time: '.self::getExecutionTime();
+            $info = array_key_exists(0, $argumentsArray) ? ' :' . $argumentsArray[0] : '';
+            $argumentsArray[0] = 'execution time: ' . self::getExecutionTime() . $info;
         }
         switch (count($argumentsArray)) {
             case 1:

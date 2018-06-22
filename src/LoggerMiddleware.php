@@ -1,9 +1,10 @@
 <?php
 namespace Depa\MiddlewareLogger;
 
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class LoggerMiddleware implements MiddlewareInterface
 {
@@ -16,10 +17,14 @@ class LoggerMiddleware implements MiddlewareInterface
     
     /**
      * {@inheritDoc}
+     * 
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
      */
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $response = $delegate->process($request);
+        $response = $handler->handle($request);
         return $response;
-    }
+    }    
 }

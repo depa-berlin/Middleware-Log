@@ -12,7 +12,7 @@ Composer require depa/middleware-logger
 
 
 
-Füge die Middleware in der pipe.conf hinzu
+Füge die Middleware in der pipeline.php hinzu
 ```php
 $app->pipe(\Depa\MiddlewareLogger\LoggerMiddleware::class);
 ```
@@ -42,6 +42,11 @@ Within a class the following logger calls can be used
 
 ```php
 Logger::alert('Text');
+Logger::warning('Text');
+Logger::notice('Text');
+Logger::info('Text');
+Logger::debug('Text');
+Logger::time();
 ```
 
 

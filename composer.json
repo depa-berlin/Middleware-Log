@@ -1,25 +1,34 @@
 {
-    "name": "depa/middleware-logger",
-    "description": ".....",
-    "keywords": ["framework","depa","Logger"],
-    "license": "MIT",
-    "homepage": "https://github.com/depa-berlin/Middleware-Logger",
-    "authors": [
-        {
-            "name": "Mirko Fenrich",
-            "email": "fenrich@designpark.de"
+	"name" : "depa/middleware-logger",
+	"description" : "The middleware logger is a PSR-15 middleware that provides logger functionality to a Zend Expressive application",
+	"keywords" : [
+		"framework",
+		"depa",
+		"Logger"
+	],
+	"license" : "MIT",
+	"homepage" : "https://github.com/depa-berlin/Middleware-Logger",
+	"authors" : [{
+			"name" : "Mirko Fenrich",
+			"email" : "fenrich@designpark.de"
+		}
+	],
+	"require" : {
+		"zendframework/zend-log" : "^2.9",
+		"ccampbell/chromephp" : "^4.1",
+		"firephp/firephp-core" : "^0.4.0"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"Depa\\MiddlewareLogger\\" : "src/"
+		}
+	},
+	"extra": {
+        "zf": {
+            "component": "Depa\\MiddlewareLogger",
+            "config-provider": "Depa\\MiddlewareLogger\\ConfigProvider"
         }
-    ],
-    "require": {
-        "zendframework/zend-log": "^2.9",
-        "ccampbell/chromephp": "^4.1",
-        "firephp/firephp-core": "^0.4.0"
     },
-    "autoload": {
-        "psr-4": {
-            "Depa\\MiddlewareLogger\\": "src/"
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+	"minimum-stability" : "dev",
+	"prefer-stable" : true
 }

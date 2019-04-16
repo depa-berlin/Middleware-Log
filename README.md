@@ -10,18 +10,16 @@ Use the Composer to install the middleware.
 Composer require depa/middleware-logger
 ```
 
-```php
-$aggregator = new ConfigAggregator([
-    \Api\ConfigProvider::class,
-    \Configuration\ConfigProvider::class,
-    \Depa\MiddlewareLogger\ConfigProvider::class,
-``` 
+
 
 Füge die Middleware in der pipe.conf hinzu
 ```php
 $app->pipe(\Depa\MiddlewareLogger\LoggerMiddleware::class);
-$app->pipe(ErrorHandler::class);
 ```
+
+The Logger can be inserted before $app->pipe(ErrorHandler::class);.
+
+
 
 The logger middleware needs a config file (https://github.com/depa-berlin/Middleware-Logger/blob/master/config/logger.local.php), which you add to the autoload folder:
 
